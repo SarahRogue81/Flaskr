@@ -1,7 +1,19 @@
 [project]
-name = "python-template"
-version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
-requires-python = ">=3.11"
-dependencies = []
+name = "flaskr"
+version = "1.0.0"
+description = "The basic blog app built in the Flask tutorial."
+dependencies = [
+    "flask",
+    "markdown",
+]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["flaskr"]

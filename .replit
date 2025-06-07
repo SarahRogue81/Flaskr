@@ -13,3 +13,47 @@ requiredFiles = [".replit", "replit.nix"]
 [deployment]
 run = ["python3", "main.py"]
 deploymentTarget = "cloudrun"
+
+[workflows]
+runButton = "Flaskr"
+
+[[workflows.workflow]]
+name = "Flaskr"
+mode = "sequential"
+author = 38118141
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "flask --app flaskr run --debug"
+
+[[workflows.workflow]]
+name = "Initialize Database"
+mode = "sequential"
+author = 38118141
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "flask --app flaskr init-db"
+
+[[workflows.workflow]]
+name = "Install"
+mode = "sequential"
+author = 38118141
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python -m pip install -e ."
+
+[[workflows.workflow]]
+name = "Test"
+mode = "sequential"
+author = 38118141
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pytest"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+exposeLocalhost = true
