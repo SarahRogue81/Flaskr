@@ -1,5 +1,6 @@
+import os
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, url_for, current_app
 )
 from werkzeug.exceptions import abort
 
@@ -103,7 +104,7 @@ def delete(id):
 
 @bp.route('/LICENSE', methods=('GET',))
 def license():
-    with open(url_for('static', filename='LICENSE.md'), 'r') as file:
+    with open(os.path.join(current_app.static_folder, 'LICENSE.md'), 'r') as file:
         content = file.read()
     
     return markdown.markdown(content)
