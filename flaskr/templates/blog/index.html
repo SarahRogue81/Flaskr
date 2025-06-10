@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 
+{% block menu %}
+  {% if g.user %}
+    <span><a class="w3-btn w3-theme-dark" href="{{ url_for('blog.create') }}">New</a></span>
+  {% endif %}
+{% endblock %}
+
 {% block header %}
 <div class="w3-container w3-mobile">
-  <div class="w3-panel w3-theme w3-center w3-bar">
-    <h1>{% block title %}Blog Posts{% endblock %}</h1>
-    {% if g.user %}
-    <a class="w3-bar-item w3-theme-dark w3-right" href="{{ url_for('blog.create') }}">New</a>
-    {% endif %}
-
+  <div class="w3-panel w3-theme w3-center">
+    <h2>{% block title %}Blog Posts{% endblock %}</h2>
   </div>
 </div>
 {% endblock %}
@@ -16,16 +18,16 @@
 <div class="w3-container">
   {% for post in posts %}
     <div class="w3-card-4 w3-mobile">
-      <div class="w3-container w3-padding">
+      <div class="w3-container">
         <div class="w3-row w3-content w3-panel w3-theme-l3">
           <div class="w3-col m10">
             <h1>{{ post['title'] }}</h1>
           </div>
-          <div class="w3-col m2 post-date">
+          <div class="w3-col m2 post-date w3-right-align">
             by {{ post['username'] }} on {{ post['created'].strftime('%m/%d/%Y') }}
           </div>
           {% if g.user['id'] == post['author_id'] %}
-            <span class="w3-bar"><a class="w3-bar-item w3-theme-dark w3-right" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a></span>
+            <div class="w3-panel w3-right-align"><a class="w3-btn w3-theme-dark" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a></div>
           {% endif %}
         </div>
         <div class="w3-row w3-content">

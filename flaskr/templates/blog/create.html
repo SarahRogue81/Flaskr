@@ -1,15 +1,37 @@
 {% extends 'base.html' %}
 
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='blog/create.css') }}">
+{% endblock %}
+
 {% block header %}
-  <h1>{% block title %}New Post{% endblock %}</h1>
+<div class="w3-container w3-mobile">
+  <div class="w3-panel w3-theme w3-center w3-bar">
+    <h2>Create Post</h2>
+  </div>
+</div>
 {% endblock %}
 
 {% block content %}
-  <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title" value="{{ request.form['title'] }}" required>
-    <label for="body">Body</label>
-    <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
-    <input type="submit" value="Save">
-  </form>
+<div class="w3-container">
+  <div class="w3-card-4 w3-mobile">
+    
+      <form class="w3-container" method="post">
+        <p>
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" class="w3-input" value="{{ request.form['title'] }}">
+        </p>
+
+        <p>
+          <label for="body">Body</label>
+          <textarea name="body" id="body" class="w3-input">{{ request.form['body'] }}</textarea>
+        </p>
+
+        <p>
+          <input class="w3-btn" type="submit" value="Save">
+        </p> 
+      </form>
+    
+  </div>
+</div>
 {% endblock %}

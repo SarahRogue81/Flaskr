@@ -32,6 +32,9 @@ def create():
         if not title:
             error = 'Title is required.'
 
+        if not body:
+            error = 'Body is required.'
+
         if error is not None:
             flash(error)
         else:
@@ -97,3 +100,10 @@ def delete(id):
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('blog.index'))
+
+@bp.route('/LICENSE', methods=('GET',))
+def license():
+    with open(url_for('static', filename='LICENSE.md'), 'r') as file:
+        content = file.read()
+    
+    return markdown.markdown(content)

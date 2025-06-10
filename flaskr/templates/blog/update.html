@@ -1,20 +1,44 @@
 {% extends 'base.html' %}
 
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='blog/update.css') }}">
+{% endblock %}
+
 {% block header %}
-  <h1>{% block title %}Edit "{{ post['title'] }}"{% endblock %}</h1>
+<div class="w3-container w3-mobile">
+  <div class="w3-panel w3-theme w3-center w3-bar">
+    <h2>{% block title %}Edit "{{ post['title'] }}"{% endblock %}</h2>
+  </div>
+</div>
 {% endblock %}
 
 {% block content %}
-  <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title"
-      value="{{ request.form['title'] or post['title'] }}" required>
-    <label for="body">Body</label>
-    <textarea name="body" id="body">{{ request.form['body'] or post['body'] }}</textarea>
-    <input type="submit" value="Save">
-  </form>
-  <hr>
-  <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
-    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
-  </form>
+<div class="w3-container">
+  <div class="w3-card-4 w3-mobile">
+
+      <form class="w3-container" method="post">
+        <p>
+          <label for="title">Title</label>
+          <input class="w3-input" id="title" name="title" value="{{ request.form['title'] or post['title'] }}" required>
+        </p>
+
+        <p>
+          <label for="body">Body</label>
+          <textarea class="w3-input" id="body" name="body">{{ request.form['body'] or post['body'] }}</textarea>
+        </p>
+
+        <p>
+          <input class="w3-btn" type="submit" value="Save">
+        </p>
+      </form>
+  
+      <hr>
+
+      <form class="w3-container w3-danger" action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
+        <p>Delete post</p>
+        <input class="w3-btn" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+      </form>
+
+  </div>
+</div>
 {% endblock %}

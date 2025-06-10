@@ -14,22 +14,36 @@
 </head>
 
 <body>
-  <nav class="w3-bar w3-theme-d3 w3-center">
+  <header class="w3-panel w3-theme w3-center">
     <h1>Flaskr</h1>
-    <ul>
-      {% if g.user %}
-        <span class="w3-bar-item w3-theme-dark">{{ g.user['username'] }}</span>
-        <a href="{{ url_for('auth.logout') }}" class="w3-bar-item w3-theme-dark">Log Out</a>
-      {% else %}
-        <a href="{{ url_for('auth.register') }}" class="w3-bar-item w3-theme-dark">Register</a>
-        <a href="{{ url_for('auth.login') }}" class="w3-bar-item w3-theme-dark">Log In</a>
-      {% endif %}
-    </ul>
+  </header>
+  
+<nav class="w3-panel w3-theme-d3">
+  {% block menu %}{% endblock %}
+  {% if g.user %}
+      <div class="w3-dropdown-hover w3-right">
+        <button class="w3-button w3-theme-dark">{{ g.user['username'] }}</button>
+        <div class="w3-dropdown-content w3-bar-block w3-border">
+          <a href="{{ url_for('auth.logout') }}" class="w3-bar-item w3-button w3-theme-light"">Log Out</a>
+        </div>
+      </div>
+    {% else %}
+      <a href="{{ url_for('auth.register') }}" class="w3-btn w3-theme-dark">Register</a>
+      <a href="{{ url_for('auth.login') }}" class="w3-btn w3-theme-dark">Log In</a>
+    {% endif %}
   </nav>
 
   {% block header %}{% endblock %}
+  {% for message in get_flashed_messages() %}
+    <div class="w3-panel w3-danger">{{ message }}</div>
+  {% endfor %}
   {% block content %}{% endblock %}
-  {% block footer %}{% endblock %}
+
+  <footer class="w3-panel w3-theme-l2 w3-row w3-center w3-mobile">
+    <div class="w3-col">Copyright 2025 Sarah Rogue</div>
+    <div class="w3-col"><a href="{{ url_for('index') }}">Flaskr</a> by Sarah Rogue is licensed under <a href="{{ url_for('blog.license') }}" class="w3-text-black">Creative Commons Attribution-NoDerivatives 4.0 International License</a></div>
+    <div class="w3-col">Powered by <a href="https://github.com/Woz-U-Group-Projects/team-glampfire-trail-mix/wiki">What's the Scoop?&trade;</a></div>
+  </footer>
 </body>
 
 </html>
