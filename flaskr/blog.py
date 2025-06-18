@@ -1,4 +1,6 @@
 import os
+import markdown
+
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for, current_app
 )
@@ -6,8 +8,6 @@ from werkzeug.exceptions import abort
 
 from flaskr.auth import login_required
 from flaskr.db import get_db
-
-import markdown
 
 bp = Blueprint('blog', __name__)
 
@@ -19,7 +19,7 @@ def index():
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' ORDER BY created DESC'
     ).fetchall()
-    
+
     return render_template('blog/index.html', posts=posts, md=markdown)
 
 @bp.route('/create', methods=('GET', 'POST'))
@@ -70,7 +70,7 @@ def get_post(id, check_author=True):
 @login_required
 def update(id):
     post = get_post(id)
-    
+
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
@@ -106,6 +106,5 @@ def delete(id):
 def license():
     with open(os.path.join(current_app.static_folder, 'LICENSE.md'), 'r') as file:
         content = file.read()
-    
-    return markdown.markdown(content)
 
+    return markdown.markdown(content)
