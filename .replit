@@ -3,7 +3,7 @@ modules = ["python-3.11"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["vim", "rsync", "openssh"]
+packages = ["vim", "rsync", "openssh", "file"]
 
 [unitTest]
 language = "python3"
