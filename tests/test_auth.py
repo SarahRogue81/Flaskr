@@ -52,4 +52,3 @@ def test_logout(client, auth):
     with client:
         auth.logout()
         assert 'user_id' not in session
-
