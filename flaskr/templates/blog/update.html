@@ -28,15 +28,15 @@
         </p>
 
         <p>
-          <input class="w3-btn" type="submit" value="Save">
+          <input class="w3-btn w3-theme-light" type="submit" value="Save">
         </p>
       </form>
   
       <hr>
 
-      <form class="w3-container w3-danger" action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
-        <p>Delete post</p>
-        <input class="w3-btn" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+      <form class="w3-container w3-danger w3-padding-16" action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
+        <b>Delete post</b><br/>
+        <input class="w3-btn w3-theme-light" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
       </form>
 
   </div>
