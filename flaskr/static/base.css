@@ -1,3 +1,12 @@
 .w3-button:hover {
-  background-color: rgb(255,255,255)!important;
+    background-color: rgb(255, 255, 255) !important;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: "Raleway", sans-serif;
 }
