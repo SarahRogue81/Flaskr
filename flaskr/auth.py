@@ -25,8 +25,8 @@ def register():
         if error is None:
             try:
                 db.execute(
-                    "INSERT INTO user (username, password) VALUES (?, ?)",
-                    (username, generate_password_hash(password)),
+                    "INSERT INTO user (username, password, admin) VALUES (?, ?, ?)",
+                    (username, generate_password_hash(password), 0),
                 )
                 db.commit()
             except db.IntegrityError:
@@ -57,6 +57,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
+            session['admin'] = True if user['admin'] == 1 else False
             return redirect(url_for('index'))
 
         flash(error)
@@ -71,7 +72,7 @@ def load_logged_in_user():
         g.user = None
     else:
         g.user = get_db().execute(
-            'SELECT * FROM user WHERE id = ?', (user_id,)
+            'SELECT * FROM user WHERE id = ?', (user_id, admin)
         ).fetchone()
 
 @bp.route('/logout')
