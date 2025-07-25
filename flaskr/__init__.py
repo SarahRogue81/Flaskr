@@ -14,7 +14,7 @@ def create_app(test_config=None):
         BLOG_TITLE = 'Flaskr',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
         SECRET_KEY='dev',
-        W3_CSS_TEMPLATE = 'https://www.w3schools.com/lib/w3-theme-w3schools.css',
+        W3_CSS_COLOUR_THEME = 'https://www.w3schools.com/lib/w3-theme-w3schools.css',
         YEAR = 2025
     )
 
