@@ -101,10 +101,3 @@ def delete(id):
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('blog.index'))
-
-@bp.route('/LICENSE', methods=('GET',))
-def license():
-    with open(os.path.join(current_app.static_folder, 'LICENSE.md'), 'r') as file:
-        content = file.read()
-
-    return markdown.markdown(content)
