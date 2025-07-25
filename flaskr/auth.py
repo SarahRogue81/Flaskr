@@ -57,7 +57,6 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            session['admin'] = True if user['admin'] == 1 else False
             return redirect(url_for('index'))
 
         flash(error)
