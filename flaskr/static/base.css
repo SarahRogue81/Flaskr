@@ -11,6 +11,6 @@ h5 {
     font-family: "Raleway", sans-serif;
 }
 
-p {
+p, li {
     font-size: 1.25rem;
 }
