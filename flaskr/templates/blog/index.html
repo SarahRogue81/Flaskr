@@ -23,10 +23,10 @@
             <div class="w3-container w3-cell w3-cell-middle">
                 <h1>{{ post['title'] }}</h1>
             </div>
-            <div class="w3-container w3-cell w3-cell-middle w3-right-align">
+            <p class="w3-container w3-cell w3-cell-middle w3-right-align">
                 by {{ post['username'] }} on {{
                 post['created'].strftime('%m/%d/%Y') }}
-            </div>
+            </p>
             {% if g.user['id'] == post['author_id'] %}
             <div class="w3-container w3-cell w3-cell-middle w3-right-align">
                 <a
