@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 from flask import Flask
 
@@ -15,7 +16,7 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
         SECRET_KEY='dev',
         W3_CSS_COLOUR_THEME = 'https://www.w3schools.com/lib/w3-theme-w3schools.css',
-        YEAR = 2025
+        YEAR = datetime.now().year
     )
 
     if test_config is None:
