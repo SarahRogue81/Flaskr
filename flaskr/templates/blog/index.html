@@ -17,12 +17,13 @@
 <div class="w3-container w3-mobile">
     <div class="w3-panel w3-theme w3-center">
         <h2>{% block title %}Blog Posts{% endblock %}</h2>
+        <i class="fa-solid fa-rotate-left w3-right" onclick="reverseOnClick();"></i>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
-<div class="w3-container">
+<div id="posts" class="w3-container blog-container">
     {% for post in posts %}
     <div class="w3-panel w3-border w3-padding-16 w3-mobile">
         <div class="w3-cell-row w3-theme-l3">
@@ -51,4 +52,9 @@
     </div>
     {% endfor %}
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://kit.fontawesome.com/9208356911.js" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='javascript/blog/index.js') }}" lang="javascript"></script>
 {% endblock %}

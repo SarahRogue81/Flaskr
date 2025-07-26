@@ -6,6 +6,10 @@
   width: 75%;
 }
 
-h2.contents {
+h2 {
   display: contents;
+}
+
+i.fa-rotate-left {
+  margin-top: 16px;
 }
