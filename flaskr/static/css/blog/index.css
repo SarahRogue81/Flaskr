@@ -5,3 +5,7 @@
 .title {
   width: 75%;
 }
+
+h2.contents {
+  display: contents;
+}
