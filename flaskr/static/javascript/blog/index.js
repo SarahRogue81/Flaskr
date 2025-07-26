@@ -3,7 +3,7 @@ function getBlogPosts() {
     const parentDiv = document.querySelector('div.w3-container.blog-container');
 
     // Get all direct child div elements
-    const childDivs = Array.from(parentDiv.querySelectorAll(':scope > div'));
+    const childDivs = Array.from(parentDiv.querySelectorAll(':scope > article'));
 
     return childDivs;
 }
