@@ -14,3 +14,7 @@ h5 {
 p, li {
     font-size: 1.25rem;
 }
+
+hr {
+  border-top-color: rgb(192, 192, 192);
+}
