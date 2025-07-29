@@ -168,4 +168,6 @@ instance/
 .replit
 .upm/
 
+# PyCharm
 .idea/
+.run/
