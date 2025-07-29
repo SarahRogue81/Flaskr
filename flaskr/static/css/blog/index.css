@@ -5,3 +5,7 @@ h2 {
 i.fa-rotate-left {
   margin-top: 16px;
 }
+
+.width-one-half {
+  width: 50%;
+}
