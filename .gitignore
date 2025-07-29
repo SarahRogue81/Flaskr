@@ -167,3 +167,5 @@ instance/
 .pythonlibs/
 .replit
 .upm/
+
+.idea/

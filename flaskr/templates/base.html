@@ -8,9 +8,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ app.config['BLOG_TITLE'] }} - {% block title %}{% endblock %}</title>
 
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
   <link rel="stylesheet" href="{{ app.config['W3_CSS_COLOUR_THEME'] }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
@@ -33,8 +34,12 @@
         </div>
       </div>
     {% else %}
-      <a href="{{ url_for('auth.register') }}" class="w3-btn w3-theme-dark">Register</a>
-      <a href="{{ url_for('auth.login') }}" class="w3-btn w3-theme-dark">Log In</a>
+      {% if app.config['SHOW_LOGIN'] %}
+        <a href="{{ url_for('auth.login') }}" class="w3-btn w3-theme-dark w3-right">Log In</a>
+      {% endif %}
+      {% if app.config['ALLOW_REGISTRATION'] %}
+        <a href="{{ url_for('auth.register') }}" class="w3-btn w3-theme-dark w3-right">Register</a>
+      {% endif %}
     {% endif %}
   </nav>
 
