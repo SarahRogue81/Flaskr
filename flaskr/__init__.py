@@ -9,16 +9,16 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_prefixed_env()
     app.config.from_mapping(
-        ALLOW_REGISTRATION = True,
-        BLOG_LICENSE = 'Creative Commons Attribution-NoDerivatives 4.0 International License',
-        BLOG_LICENSE_URL = 'https://creativecommons.org/licenses/by-nc-nd/4.0/',
-        BLOG_OWNER = 'Pallets',
-        BLOG_TITLE = 'Flaskr',
+        ALLOW_REGISTRATION=True,
+        BLOG_LICENSE='Creative Commons Attribution-NoDerivatives 4.0 International License',
+        BLOG_LICENSE_URL='https://creativecommons.org/licenses/by-nc-nd/4.0/',
+        BLOG_OWNER='Pallets',
+        BLOG_TITLE='Flaskr',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
         SECRET_KEY='dev',
-        SHOW_LOGIN = True,
-        W3_CSS_COLOUR_THEME = 'https://www.w3schools.com/lib/w3-theme-w3schools.css',
-        YEAR = datetime.now().year
+        SHOW_LOGIN=True,
+        W3_CSS_COLOUR_THEME='https://www.w3schools.com/lib/w3-theme-w3schools.css',
+        YEAR=datetime.now().year
     )
 
     if test_config is None:

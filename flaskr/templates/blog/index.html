@@ -1,53 +1,55 @@
 {% extends 'base.html' %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/blog/index.css') }}" />
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='assets/fontawesome-free-7.0.0-web/css/fontawesome.min.css') }}"/>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='assets/fontawesome-free-7.0.0-web/css/solid.min.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/blog/index.css') }}"/>
 {% endblock %}
 
 {% block menu %}
-{% if g.user %}
-    <span><a class="w3-btn w3-theme-dark" href="{{ url_for('blog.create') }}">New</a></span>
-{% endif %}
+    {% if g.user %}
+        <span><a class="w3-btn w3-theme-dark" href="{{ url_for('blog.create') }}">New</a></span>
+    {% endif %}
 {% endblock %}
 
 {% block header %}
-<div class="w3-container w3-mobile">
-    <div class="w3-panel w3-theme w3-center">
-        <h2>{% block title %}Blog Posts{% endblock %}</h2>
-        <i class="fa-solid fa-rotate-left w3-right" onclick="reverseOnClick();"></i>
+    <div class="w3-container w3-mobile">
+        <div class="w3-panel w3-theme w3-center">
+            <h2>{% block title %}Blog Posts{% endblock %}</h2>
+            <i class="fa-solid fa-rotate-left w3-right" onclick="reverseOnClick();"></i>
+        </div>
     </div>
-</div>
 {% endblock %}
 
 {% block content %}
-<div id="posts" class="w3-container blog-container">
-    {% for post in posts %}
-    <article class="w3-panel w3-border w3-padding-16 w3-mobile">
-        <div class="w3-cell-row w3-theme-l3">
-            <div class="w3-container w3-cell w3-cell-middle width-one-half">
-                <h3><a href="{{ post['id'] }}/permalink">{{ post['title'] }}</a></h3>
-            </div>
-            <div class="w3-container w3-cell w3-cell-middle w3-right-align width-one-half">
-                by {{ post['username'] }} on {{
-                post['created'].strftime('%m/%d/%Y') }}
-            </div>
-            {% if g.user['id'] == post['author_id'] %}
-            <div class="w3-container w3-cell w3-cell-middle w3-right-align">
-                <a class="w3-btn w3-theme-dark" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
-            </div>
-            {% endif %}
-        </div>
-        <div class="w3-cell-row w3-mobile">
-            <div class="w3-container w3-cell">
-                {{ md.markdown(post['body']) | safe}}
-            </div>
-        </div>
-    </article>
-    {% endfor %}
-</div>
+    <div id="posts" class="w3-container blog-container">
+        {% for post in posts %}
+            <article class="w3-panel w3-border w3-padding-16 w3-mobile">
+                <div class="w3-cell-row w3-theme-l3">
+                    <div class="w3-container w3-cell w3-cell-middle width-one-half">
+                        <h3><a href="{{ post['id'] }}/permalink">{{ post['title'] }}</a></h3>
+                    </div>
+                    <div class="w3-container w3-cell w3-cell-middle w3-right-align width-one-half">
+                        by {{ post['username'] }} on {{ post['created'].strftime('%m/%d/%Y') }}
+                    </div>
+                    {% if g.user['id'] == post['author_id'] %}
+                        <div class="w3-container w3-cell w3-cell-middle w3-right-align">
+                            <a class="w3-btn w3-theme-dark" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="w3-cell-row w3-mobile">
+                    <div class="w3-container w3-cell">
+                        {{ md.markdown(post['body']) | safe }}
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
 {% endblock %}
 
 {% block scripts %}
-<script src="https://kit.fontawesome.com/9208356911.js" crossorigin="anonymous"></script>
-<script src="{{ url_for('static', filename='javascript/blog/index.js') }}" lang="javascript"></script>
+    <script src="{{ url_for('static', filename='javascript/blog/index.js') }}" lang="javascript"></script>
 {% endblock %}
