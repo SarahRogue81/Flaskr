@@ -10,7 +10,8 @@ Inspired by [Flask's](https://pypi.org/project/Flask/) amazing [Tutorial](https:
 4. Added [_The MIT License_](https://opensource.org/license/mit) to the main project so that it's the same license as Flask
 5. Added more config variables (with sane defaults) to the [`flasker/__init__.py`](https://github.com/SarahRogue81/Flaskr/blob/main/flaskr/__init__.py) file
 6. Changed font to [Raleway](https://fonts.google.com/specimen/Raleway) for a more professional look
-7. Added footer displaying copyright, [Creative Commons](https://creativecommons.org/) license line, and Powered By line pointing to the inspiration for the blog layout
+7. Added permalink (blog detail) for each blog post on the main index page
+8. Added footer displaying copyright, [Creative Commons](https://creativecommons.org/) license line, and Powered By line pointing to the inspiration for the blog layout
 
 ## Dynamic Blog
 
