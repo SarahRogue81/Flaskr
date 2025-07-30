@@ -17,7 +17,7 @@ Inspired by [Flask's](https://pypi.org/project/Flask/) amazing [Tutorial](https:
 To make the Flaskr blog server dynamic, the following variables are set, by default and can be overridden in the `instance/config.py` file:
 
 - `ALLOW_REGISTRATION` &ndash; enables/disables user registration
-   - __default__: &ndash; `True`
+   - __default__: `True`
 - `BLOG_LICENSE` &ndash; the name of the [Creative Commons](https://creativecommons.org/) license for your blog
    - __default__: _Creative Commons Attribution-NoDerivatives 4.0 International License_
 - `BLOG_LICENSE_URL` &ndash; the URL to the License Deed
@@ -29,7 +29,7 @@ To make the Flaskr blog server dynamic, the following variables are set, by defa
 - `SECRET_KEY` &ndash; The Flask secret key which should be changed for production, see the [Tutorial](https://flask.palletsprojects.com/en/stable/tutorial/deploy/#configure-the-secret-key) for further instructions
    - __default__: dev
 - `SHOW_LOGIN` &ndash; enable/disable the Login button in the `navbar`
-   - __default__ &ndash; `True`
+   - __default__: `True`
 - `W3_CSS_COLOUR_THEME` &ndash; the [W3.CSS Colour Template](https://www.w3schools.com/w3css/w3css_color_themes.asp) that you want to use
    - __default__: https://www.w3schools.com/lib/w3-theme-w3schools.css
 
@@ -71,9 +71,9 @@ For information on running on a production server, please consult the [_Deploy t
 
 There are many to choose from but Flaskr has been setup to be developed and deployed to [Replit](https://replit.com/) as well as [PythonAnywhere](https://pythonanywhere.com).
 
-There's nothing that needs be changed to get this to work on either. The `uv.log` is for Replit and the `flask_app.py` is for PythonAnywhere. Again, this is all setup for you.
+There's nothing that needs be changed to get this to work on either. The `uv.log` and `.replit` files are for Replit and the `flask_app.py` file is for PythonAnywhere. Again, this is all setup for you.
 
-Also, GitHub Codespaces is pretty sweet to develop on as well. It's like an online VS Code editor. And with their CI/CD cycle, you can't go wrong for any project.
+Also, GitHub Codespaces is pretty good to develop on as well. It's like an online VS Code editor. And with their CI/CD cycle, you can't go wrong for any project.
 
 ## Offline Development
 
@@ -83,7 +83,7 @@ One of my favorites is [Zed](https://zed.dev/). It's super light weight and work
 
 And, of course, [VS Code](https://code.visualstudio.com/) works as well. It's big plus is the use of Copilot, which is also on GitHub.
 
-While there are others, my all time favorite Python IDE is [PyCharm](https://www.jetbrains.com/pycharm/). It's AI doesn\'t get in the way and it's easy to use.
+While there are others, my all time favorite Python IDE is [PyCharm](https://www.jetbrains.com/pycharm/). Its AI doesn't get in the way and it's easy to use.
 
 ## Security
 
@@ -97,6 +97,6 @@ Once registration is not allowed, the following non-Flask commands can be used t
 
 And, for passwords, they are auto-generated with a length of 42 characters consisting of upper & lower case characters, numbers, and symbols.
 
-Just copy them into your Password Manager and you're good to go.
+Just copy the generated password into your Password Manager and you're good to go.
 
 If you can't run those commands in production, have a sane `instance/flaskr.sqlite` database file ready and deploy it along with the WHL file. No need to `flask init-db`.
