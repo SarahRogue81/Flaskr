@@ -2,7 +2,7 @@ import os
 import random
 import sqlite3
 import string
-from argparse import (ArgumentParser, ArgumentError)
+from argparse import ArgumentParser
 from werkzeug.security import generate_password_hash
 
 # setup parser
@@ -47,7 +47,8 @@ if not fake:
         if username:
             cursor.execute('UPDATE user SET username = ? WHERE username = ?', (username, old_username))
         else:
-            raise ArgumentError('You must specify a username or password')
+            print('Nothing to do here')
+            quit(1)
 
 
     connection.commit()
