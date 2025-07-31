@@ -25,7 +25,7 @@
 </header>
 
 <nav class="w3-panel w3-theme-d3">
-    <a href="{{ url_for('blog.index') }}" class="w3-btn w3-theme-dark">Home</a>
+    {% block home %}<a href="{{ url_for('blog.index') }}" class="w3-btn w3-theme-dark">Home</a>{% endblock %}
     {% block menu %}{% endblock %}
     {% if g.user %}
         <div class="w3-dropdown-hover w3-right">

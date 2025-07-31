@@ -11,21 +11,22 @@ from flaskr.db import get_db
 
 bp = Blueprint('blog', __name__)
 
+
 @bp.route('/')
 @bp.route('/page/<int:page>')
 def index(page=1):
     db = get_db()
-    
+
     # Get total count of posts
     total_posts = db.execute('SELECT COUNT(*) FROM post').fetchone()[0]
-    
+
     if total_posts == 0:
         return render_template('blog/index.html', post=None, md=markdown, app=current_app,
-                             current_page=1, total_pages=0, has_prev=False, has_next=False)
-    
+                               current_page=1, total_pages=0, has_prev=False, has_next=False)
+
     # Calculate offset for pagination (page numbers start at 1)
     offset = (page - 1)
-    
+
     # Get single post for current page
     post = db.execute(
         'SELECT p.id, title, body, created, author_id, username'
@@ -34,21 +35,22 @@ def index(page=1):
         ' LIMIT 1 OFFSET ?',
         (offset,)
     ).fetchone()
-    
+
     # If no post found for this page, redirect to last valid page
     if post is None:
         if page > total_posts:
             return redirect(url_for('blog.index', page=total_posts))
         else:
             return redirect(url_for('blog.index'))
-    
+
     # Calculate pagination info
     has_prev = page > 1
     has_next = page < total_posts
-    
+
     return render_template('blog/index.html', post=post, md=markdown, app=current_app,
-                         current_page=page, total_pages=total_posts, 
-                         has_prev=has_prev, has_next=has_next)
+                           current_page=page, total_pages=total_posts,
+                           has_prev=has_prev, has_next=has_next)
+
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
@@ -78,6 +80,7 @@ def create():
 
     return render_template('blog/create.html', app=current_app)
 
+
 def get_post(id, check_author=True):
     post = get_db().execute(
         'SELECT p.id, title, body, created, author_id, username'
@@ -93,6 +96,7 @@ def get_post(id, check_author=True):
         abort(403)
 
     return post
+
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
@@ -121,6 +125,7 @@ def update(id):
 
     return render_template('blog/update.html', post=post, app=current_app)
 
+
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
 def delete(id):
@@ -129,6 +134,7 @@ def delete(id):
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('blog.index'))
+
 
 @bp.route('/<int:id>/permalink', methods=('GET',))
 def permalink(id):
@@ -139,4 +145,8 @@ def permalink(id):
         (id,)
     ).fetchone()
 
-    return render_template('blog/permalink.html', post=post, md=markdown, app=current_app)
+    page = request.args.get('from_page', 1)
+
+    home_url = f'/page/{page}'
+
+    return render_template('blog/permalink.html', home_url=home_url, post=post, md=markdown, app=current_app)
