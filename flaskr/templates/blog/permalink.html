@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 
+{% block stylesheets %}
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/blog/permalink.css') }}" />
+{% endblock %}
+
 {% block home %}<a href="{{ home_url }}" class="w3-btn w3-theme-dark">Home</a>{% endblock %}
 
 {% block content %}
     <article id="posts" class="w3-container">
         <div class="w3-panel w3-border w3-padding-16 w3-paper">
-            <h2 class="w3-center w3-theme-l2">{{ post['title'] }}</h2>
+            <div class="w3-center w3-theme-l3">
+                <h2>{{ post['title'] }}</h2>
+                <p id="by_line" class="w3-medium">by {{ post['username'] }} on {{ post['created'].strftime('%m/%d/%Y') }}</p>
+            </div>
             {{ md.markdown(post['body']) | safe }}
         </div>
     </article>
