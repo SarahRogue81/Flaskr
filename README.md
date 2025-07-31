@@ -11,7 +11,8 @@ Inspired by [Flask's](https://pypi.org/project/Flask/) amazing [Tutorial](https:
 5. Added more config variables (with sane defaults) to the [`flasker/__init__.py`](https://github.com/SarahRogue81/Flaskr/blob/main/flaskr/__init__.py) file
 6. Changed font to [Raleway](https://fonts.google.com/specimen/Raleway) for a more professional look
 7. Added permalink (blog detail) for each blog post on the main index page
-8. Added footer displaying copyright, [Creative Commons](https://creativecommons.org/) license line, and Powered By line pointing to the inspiration for the blog layout
+8. Added pagination with one blog post showing on the index page which also works properly with the permalinked posts
+9. Added footer displaying copyright, [Creative Commons](https://creativecommons.org/) license line, and Powered By line pointing to the inspiration for the blog layout
 
 ## Dynamic Blog
 
