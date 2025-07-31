@@ -21,7 +21,30 @@
 
 {% block content %}
     {% if post %}
-        <!-- Navigation arrows -->
+        <!-- Single post display -->
+        <article class="w3-container">
+            <article class="w3-panel w3-border w3-padding-16 w3-paper">
+                <div class="w3-cell-row w3-theme-l3">
+                    <div class="w3-container w3-cell w3-cell-middle width-one-half">
+                        <h3>{{ post['title'] }}&nbsp;<a href="{{ post['id'] }}/permalink?from_page={{ current_page }}"><sup class="fa-solid fa-link"></sup></a></h3>
+                    </div>
+                    <div class="w3-container w3-cell w3-cell-middle w3-right-align width-one-half">
+                        by {{ post['username'] }} on {{ post['created'].strftime('%m/%d/%Y') }}
+                    </div>
+                    {% if g.user and g.user['id'] == post['author_id'] %}
+                        <div class="w3-container w3-cell w3-cell-middle w3-right-align">
+                            <a class="w3-btn w3-theme-dark" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="w3-cell-row w3-mobile">
+                    <div class="w3-container w3-cell">
+                        {{ md.markdown(post['body']) | safe }}
+                    </div>
+                </div>
+            </article>
+        </article>
+                <!-- Navigation arrows -->
         <div class="w3-container w3-center w3-margin-bottom">
             <div class="w3-bar">
                 <!-- First page -->
@@ -75,32 +98,9 @@
             </div>
         </div>
 
-        <!-- Single post display -->
-        <article id="posts" class="w3-container blog-container">
-            <article class="w3-panel w3-border w3-padding-16 w3-paper">
-                <div class="w3-cell-row w3-theme-l3">
-                    <div class="w3-container w3-cell w3-cell-middle width-one-half">
-                        <h3>{{ post['title'] }}&nbsp;<a href="{{ post['id'] }}/permalink?from_page={{ current_page }}"><sup class="fa-solid fa-link"></sup></a></h3>
-                    </div>
-                    <div class="w3-container w3-cell w3-cell-middle w3-right-align width-one-half">
-                        by {{ post['username'] }} on {{ post['created'].strftime('%m/%d/%Y') }}
-                    </div>
-                    {% if g.user and g.user['id'] == post['author_id'] %}
-                        <div class="w3-container w3-cell w3-cell-middle w3-right-align">
-                            <a class="w3-btn w3-theme-dark" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
-                        </div>
-                    {% endif %}
-                </div>
-                <div class="w3-cell-row w3-mobile">
-                    <div class="w3-container w3-cell">
-                        {{ md.markdown(post['body']) | safe }}
-                    </div>
-                </div>
-            </article>
-        </article>
     {% else %}
-        <div class="w3-container w3-center">
+        <article class="w3-container w3-center">
             <p>No blog posts found.</p>
-        </div>
+        </article>
     {% endif %}
 {% endblock %}
