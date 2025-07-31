@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% block stylesheets %}
@@ -18,14 +19,68 @@
     <div class="w3-container w3-mobile">
         <div class="w3-panel w3-theme w3-center">
             <h2>{% block title %}Blog Posts{% endblock %}</h2>
-            <i class="fa-solid fa-rotate-left w3-right" onclick="reverseOnClick();"></i>
         </div>
     </div>
 {% endblock %}
 
 {% block content %}
-    <div id="posts" class="w3-container blog-container">
-        {% for post in posts %}
+    {% if post %}
+        <!-- Navigation arrows -->
+        <div class="w3-container w3-center w3-margin-bottom">
+            <div class="w3-bar">
+                <!-- First page -->
+                {% if has_prev %}
+                    <a href="{{ url_for('blog.index', page=1) }}" class="w3-bar-item w3-button w3-theme-dark">
+                        <i class="fa-solid fa-angles-left"></i> First
+                    </a>
+                {% else %}
+                    <span class="w3-bar-item w3-button w3-disabled">
+                        <i class="fa-solid fa-angles-left"></i> First
+                    </span>
+                {% endif %}
+
+                <!-- Previous page -->
+                {% if has_prev %}
+                    <a href="{{ url_for('blog.index', page=current_page-1) }}" class="w3-bar-item w3-button w3-theme-dark">
+                        <i class="fa-solid fa-angle-left"></i> Previous
+                    </a>
+                {% else %}
+                    <span class="w3-bar-item w3-button w3-disabled">
+                        <i class="fa-solid fa-angle-left"></i> Previous
+                    </span>
+                {% endif %}
+
+                <!-- Page indicator -->
+                <span class="w3-bar-item w3-button w3-theme-l3">
+                    {{ current_page }} of {{ total_pages }}
+                </span>
+
+                <!-- Next page -->
+                {% if has_next %}
+                    <a href="{{ url_for('blog.index', page=current_page+1) }}" class="w3-bar-item w3-button w3-theme-dark">
+                        Next <i class="fa-solid fa-angle-right"></i>
+                    </a>
+                {% else %}
+                    <span class="w3-bar-item w3-button w3-disabled">
+                        Next <i class="fa-solid fa-angle-right"></i>
+                    </span>
+                {% endif %}
+
+                <!-- Last page -->
+                {% if has_next %}
+                    <a href="{{ url_for('blog.index', page=total_pages) }}" class="w3-bar-item w3-button w3-theme-dark">
+                        Last <i class="fa-solid fa-angles-right"></i>
+                    </a>
+                {% else %}
+                    <span class="w3-bar-item w3-button w3-disabled">
+                        Last <i class="fa-solid fa-angles-right"></i>
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Single post display -->
+        <div id="posts" class="w3-container blog-container">
             <article class="w3-panel w3-border w3-padding-16 w3-mobile">
                 <div class="w3-cell-row w3-theme-l3">
                     <div class="w3-container w3-cell w3-cell-middle width-one-half">
@@ -34,7 +89,7 @@
                     <div class="w3-container w3-cell w3-cell-middle w3-right-align width-one-half">
                         by {{ post['username'] }} on {{ post['created'].strftime('%m/%d/%Y') }}
                     </div>
-                    {% if g.user['id'] == post['author_id'] %}
+                    {% if g.user and g.user['id'] == post['author_id'] %}
                         <div class="w3-container w3-cell w3-cell-middle w3-right-align">
                             <a class="w3-btn w3-theme-dark" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
                         </div>
@@ -46,10 +101,10 @@
                     </div>
                 </div>
             </article>
-        {% endfor %}
-    </div>
-{% endblock %}
-
-{% block scripts %}
-    <script src="{{ url_for('static', filename='javascript/blog/index.js') }}" lang="javascript"></script>
+        </div>
+    {% else %}
+        <div class="w3-container w3-center">
+            <p>No blog posts found.</p>
+        </div>
+    {% endif %}
 {% endblock %}

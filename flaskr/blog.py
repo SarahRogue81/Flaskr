@@ -12,15 +12,43 @@ from flaskr.db import get_db
 bp = Blueprint('blog', __name__)
 
 @bp.route('/')
-def index():
+@bp.route('/page/<int:page>')
+def index(page=1):
     db = get_db()
-    posts = db.execute(
+    
+    # Get total count of posts
+    total_posts = db.execute('SELECT COUNT(*) FROM post').fetchone()[0]
+    
+    if total_posts == 0:
+        return render_template('blog/index.html', post=None, md=markdown, app=current_app,
+                             current_page=1, total_pages=0, has_prev=False, has_next=False)
+    
+    # Calculate offset for pagination (page numbers start at 1)
+    offset = (page - 1)
+    
+    # Get single post for current page
+    post = db.execute(
         'SELECT p.id, title, body, created, author_id, username'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' ORDER BY created DESC'
-    ).fetchall()
-
-    return render_template('blog/index.html', posts=posts, md=markdown, app=current_app)
+        ' LIMIT 1 OFFSET ?',
+        (offset,)
+    ).fetchone()
+    
+    # If no post found for this page, redirect to last valid page
+    if post is None:
+        if page > total_posts:
+            return redirect(url_for('blog.index', page=total_posts))
+        else:
+            return redirect(url_for('blog.index'))
+    
+    # Calculate pagination info
+    has_prev = page > 1
+    has_next = page < total_posts
+    
+    return render_template('blog/index.html', post=post, md=markdown, app=current_app,
+                         current_page=page, total_pages=total_posts, 
+                         has_prev=has_prev, has_next=has_next)
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
@@ -112,4 +140,3 @@ def permalink(id):
     ).fetchone()
 
     return render_template('blog/permalink.html', post=post, md=markdown, app=current_app)
-
