@@ -76,8 +76,8 @@
         </div>
 
         <!-- Single post display -->
-        <div id="posts" class="w3-container blog-container">
-            <article class="w3-panel w3-border w3-padding-16 w3-mobile">
+        <article id="posts" class="w3-container blog-container">
+            <article class="w3-panel w3-border w3-padding-16 w3-paper">
                 <div class="w3-cell-row w3-theme-l3">
                     <div class="w3-container w3-cell w3-cell-middle width-one-half">
                         <h3>{{ post['title'] }}&nbsp;<a href="{{ post['id'] }}/permalink?from_page={{ current_page }}"><sup class="fa-solid fa-link"></sup></a></h3>
@@ -97,7 +97,7 @@
                     </div>
                 </div>
             </article>
-        </div>
+        </article>
     {% else %}
         <div class="w3-container w3-center">
             <p>No blog posts found.</p>
