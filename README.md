@@ -13,6 +13,7 @@ Inspired by [Flask's](https://pypi.org/project/Flask/) amazing [Tutorial](https:
 7. Added permalink (blog detail) for each blog post on the main index page
 8. Added pagination with one blog post showing on the index page which also works properly with the permalinked posts
 9. Added footer displaying copyright, [Creative Commons](https://creativecommons.org/) license line, and Powered By line pointing to the inspiration for the blog layout
+10. Added full [Font Awesome Free Version 7.0.0](https://fontawesome.com/download) support
 
 ## Dynamic Blog
 
