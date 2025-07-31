@@ -1,40 +1,10 @@
 {% extends 'base.html' %}
 
-{% block menu %}
-{% if g.user %}
-    <span><a class="w3-btn w3-theme-dark" href="{{ url_for('blog.create') }}">New</a></span>
-{% endif %}
-{% endblock %}
-
-{% block header %}
-<div class="w3-container w3-mobile">
-    <div class="w3-panel w3-theme w3-center">
-        <div class="w3-cell-row">
-            <div class="w3-container w3-cell w3-cell-middle">
-                <h2>{{ post['title'] }}</h2>
-            </div>
-            <p class="w3-container w3-cell w3-cell-middle w3-right-align">
-                by {{ post['username'] }} on {{
-                post['created'].strftime('%m/%d/%Y') }}
-            </p>
-            {% if g.user['id'] == post['author_id'] %}
-                <div class="w3-container w3-cell w3-cell-middle w3-right-align">
-                    <a class="w3-btn w3-theme-dark" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-</div>
-{% endblock %}
-
 {% block content %}
-<article id="posts" class="w3-container">
-    <div class="w3-panel w3-border w3-padding-16 w3-mobile">
-        <div class="w3-cell-row w3-mobile">
-            <div class="w3-container w3-cell">
-                {{ md.markdown(post['body']) | safe}}
-            </div>
+    <article id="posts" class="w3-container">
+        <div class="w3-panel w3-border w3-padding-16 w3-paper">
+            <h2 class="w3-center w3-theme-l2">{{ post['title'] }}</h2>
+            {{ md.markdown(post['body']) | safe }}
         </div>
-    </div>
-</article>
+    </article>
 {% endblock %}
