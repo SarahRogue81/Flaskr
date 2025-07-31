@@ -17,3 +17,9 @@ hr {
 h1, h2, h3 {
     font-weight: bolder;
 }
+
+pre {
+    background-color: #f1f1f1;
+    margin: 32px;
+    padding: 16px;
+}
