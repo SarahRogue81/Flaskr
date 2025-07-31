@@ -2,58 +2,63 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <base href="/">
+    <meta charset="utf-8">
+    <base href="/">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ app.config['BLOG_TITLE'] }} - {% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ app.config['BLOG_TITLE'] }} - {% block title %}{% endblock %}</title>
 
-  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
-  <link rel="stylesheet" href="{{ app.config['W3_CSS_COLOUR_THEME'] }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-  {% block stylesheets %}{% endblock %}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link type="text/css" rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/w3css/5/w3.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ app.config['W3_CSS_COLOUR_THEME'] }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    {% block stylesheets %}{% endblock %}
 </head>
 
 <body>
-  <header class="w3-panel w3-theme w3-center">
+<header class="w3-panel w3-theme w3-center">
     <h1>{{ app.config['BLOG_TITLE'] }}</h1>
-  </header>
+</header>
 
 <nav class="w3-panel w3-theme-d3">
-  <a href="{{ url_for('blog.index') }}" class="w3-btn w3-theme-dark">Home</a>
-  {% block menu %}{% endblock %}
-  {% if g.user %}
-      <div class="w3-dropdown-hover w3-right">
-        <button class="w3-button w3-theme-dark">{{ g.user['username'] }}</button>
-        <div class="w3-dropdown-content w3-bar-block w3-border">
-          <a href="{{ url_for('auth.logout') }}" class="w3-bar-item w3-btn w3-theme-light"">Log Out</a>
+    <a href="{{ url_for('blog.index') }}" class="w3-btn w3-theme-dark">Home</a>
+    {% block menu %}{% endblock %}
+    {% if g.user %}
+        <div class="w3-dropdown-hover w3-right">
+            <button class="w3-button w3-theme-dark">{{ g.user['username'] }}</button>
+            <div class="w3-dropdown-content w3-bar-block w3-border">
+                <a href="{{ url_for('auth.logout') }}" class="w3-bar-item w3-btn w3-theme-light"">Log Out</a>
+            </div>
         </div>
-      </div>
     {% else %}
-      {% if app.config['SHOW_LOGIN'] %}
-        <a href="{{ url_for('auth.login') }}" class="w3-btn w3-theme-dark w3-right">Log In</a>
-      {% endif %}
-      {% if app.config['ALLOW_REGISTRATION'] %}
-        <a href="{{ url_for('auth.register') }}" class="w3-btn w3-theme-dark w3-right">Register</a>
-      {% endif %}
+        {% if app.config['SHOW_LOGIN'] %}
+            <a href="{{ url_for('auth.login') }}" class="w3-btn w3-theme-dark w3-right">Log In</a>
+        {% endif %}
+        {% if app.config['ALLOW_REGISTRATION'] %}
+            <a href="{{ url_for('auth.register') }}" class="w3-btn w3-theme-dark w3-right">Register</a>
+        {% endif %}
     {% endif %}
-  </nav>
+</nav>
 
-  {% block header %}{% endblock %}
-  {% for message in get_flashed_messages() %}
+{% block header %}{% endblock %}
+{% for message in get_flashed_messages() %}
     <div class="w3-panel w3-danger">{{ message }}</div>
-  {% endfor %}
-  {% block content %}{% endblock %}
+{% endfor %}
+{% block content %}{% endblock %}
 
-  <footer class="w3-panel w3-theme-l2 w3-center w3-mobile">
+<footer class="w3-panel w3-theme-l2 w3-center w3-mobile">
     <div class="w3-cell-row">Copyright {{ app.config['YEAR'] }} by {{ app.config['BLOG_OWNER'] }}</div>
-    <div class="w3-cell-row"><a href="{{ url_for('index') }}">{{ app.config['BLOG_TITLE'] }}</a> by {{ app.config['BLOG_OWNER'] }} is licensed under the <a href="{{ app.config['BLOG_LICENSE_URL'] }}">{{ app.config['BLOG_LICENSE'] }}</a></div>
-    <div class="w3-cell-row">Powered by <a href="https://www.w3schools.com/w3css">W3.CSS</a> and <a href="https://github.com/Woz-U-Group-Projects/team-glampfire-trail-mix/wiki">What's the Scoop?&trade;</a></div>
-  </footer>
+    <div class="w3-cell-row"><a href="{{ url_for('index') }}">{{ app.config['BLOG_TITLE'] }}</a>
+        by {{ app.config['BLOG_OWNER'] }} is licensed under the <a
+                href="{{ app.config['BLOG_LICENSE_URL'] }}">{{ app.config['BLOG_LICENSE'] }}</a></div>
+    <div class="w3-cell-row">Powered by <a href="https://www.w3schools.com/w3css">W3.CSS</a> and <a
+            href="https://github.com/Woz-U-Group-Projects/team-glampfire-trail-mix/wiki">What's the Scoop?&trade;</a>
+    </div>
+</footer>
 </body>
 
 {% block scripts %}{% endblock %}
