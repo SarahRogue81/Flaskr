@@ -25,7 +25,7 @@ author = 38118141
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "flask --app flaskr run --debug"
+args = "flask flaskr run --debug"
 
 [[workflows.workflow]]
 name = "Initialize Database"
@@ -34,7 +34,7 @@ author = 38118141
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "flask --app flaskr init-db"
+args = "flask flaskr init-db"
 
 [[workflows.workflow]]
 name = "Install"
