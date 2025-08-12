@@ -23,13 +23,9 @@ if not forced:
 
 # delete user
 DATABASE = os.path.join('instance', 'flaskr.sqlite')
-connection = sqlite3.connect(DATABASE)
-cursor = connection.cursor()
-
-cursor.execute('DELETE FROM user WHERE username = ?', (username,))
-
-connection.commit()
-connection.close()
+with sqlite3.connect(DATABASE) as conn:
+    conn.execute('DELETE FROM user WHERE username = ?', (username,))
+    conn.commit()
 
 # display information deleted from database
 print(f'Deleted {username}')

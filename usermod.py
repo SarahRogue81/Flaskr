@@ -33,26 +33,23 @@ if password:
 if not fake:
     # modify user
     DATABASE = os.path.join('instance', 'flaskr.sqlite')
-    connection = sqlite3.connect(DATABASE)
-    cursor = connection.cursor()
+    with sqlite3.connect(DATABASE) as conn:
 
-    if password:
-        if username:
-            cursor.execute('UPDATE user SET username = ?, password = ? WHERE username = ?', (username,
-                                new_password, old_username))
+        if password:
+            if username:
+                conn.execute('UPDATE user SET username = ?, password = ? WHERE username = ?', (username, new_password, old_username))
+            else:
+                username = old_username
+                conn.execute('UPDATE user SET password = ? WHERE username = ?', (new_password, username))
         else:
-            username = old_username
-            cursor.execute('UPDATE user SET password = ? WHERE username = ?', (new_password, username))
-    else:
-        if username:
-            cursor.execute('UPDATE user SET username = ? WHERE username = ?', (username, old_username))
-        else:
-            print('Nothing to do here')
-            quit(1)
+            if username:
+                conn.execute('UPDATE user SET username = ? WHERE username = ?', (username, old_username))
+            else:
+                print('Nothing to do here')
+                quit(1)
 
 
-    connection.commit()
-    connection.close()
+        conn.commit()
 
 # display information written to database
 print(f'username: {username}')

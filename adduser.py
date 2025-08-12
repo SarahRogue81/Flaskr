@@ -26,12 +26,9 @@ password = generate_password_hash(password_raw)
 if not fake:
     # add user to database
     DATABASE = os.path.join('instance', 'flaskr.sqlite')
-    connection = sqlite3.connect(DATABASE)
-    cursor = connection.cursor()
-
-    cursor.execute('INSERT INTO user (username, password) VALUES (?, ?)', (username, password))
-    connection.commit()
-    connection.close()
+    with sqlite3.connect(DATABASE) as conn
+        conn.execute('INSERT INTO user (username, password) VALUES (?, ?)', (username, password))
+        conn.commit()
 
 # display information written to database
 print(f'username: {username}')
